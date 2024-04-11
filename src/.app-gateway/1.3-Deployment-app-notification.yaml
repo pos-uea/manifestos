@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-notification
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app-notification
+  template:
+    metadata:
+      labels:
+        app: app-notification
+        version: latest
+    spec:
+      containers:
+        - env:
+            - name: RMQ_PASSWORD
+              value: V_KgZIxoDG14XMT3-R7QwXdOHQlofEwE
+            - name: RMQ_PROTOCOLO
+              value: amqps
+            - name: RMQ_URL
+              value: shrimp.rmq.cloudamqp.com/enrfxamp
+            - name: RMQ_USER
+              value: enrfxamp
+          image: manscalh/app-notification:latest
+          imagePullPolicy: Always
+          name: app-notification
+          ports:
+            - containerPort: 3002
+              hostPort: 3002
+              protocol: TCP
+          resources:
+            limits:
+              cpu: "1"
+              memory: "512Mi"
+            requests:
+              cpu: "0.5"
+              memory: "256Mi"
+      restartPolicy: Always

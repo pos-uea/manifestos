@@ -1,0 +1,7 @@
+**/.terraform/*
+
+.terraform
+
+pos-uea/.terraform/
+pos-uea/.terraform/*
+credentias.txt
